@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Xin lỗi Khánh Bình 💖</title>
+  <style>
+    :root{
+      --bg:#0f1226;
+      --card:#151935cc;
+      --text:#eef1ff;
+      --muted:#b8baf0;
+      --accent:#ff4d6d;
+      --ok:#22c55e;
+      --shadow: 0 10px 30px rgba(0,0,0,.4);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--text);
+      background: radial-gradient(1200px 600px at 20% 10%, #1b2253 0%, #0f1226 60%),
+                  radial-gradient(800px 500px at 90% 10%, #1a2645 0%, #0f1226 70%), #0f1226;
+      overflow-x:hidden;
+    }
+    /* Nền sticker dễ thương */
+    .stickers{position:fixed; inset:0; pointer-events:none; z-index:-1; opacity:.22}
+    .sticker{position:absolute; font-size:clamp(18px,2vw,24px); filter:saturate(1.15)}
+    @keyframes floaty{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
+
+    .wrap{max-width:900px;margin:0 auto;padding:28px}
+    header{
+      position:relative;
+      padding:28px; border-radius:24px; background:linear-gradient(180deg, #1b1f44cc, #12162f99);
+      box-shadow:var(--shadow); backdrop-filter: blur(10px); text-align:left;
+    }
+    h1{margin:0 0 8px; font-size:clamp(28px,6vw,48px); letter-spacing:.5px}
+    .subtitle{color:var(--muted); font-size:clamp(14px,2.5vw,18px)}
+
+    .card{
+      margin-top:22px; background:var(--card); border:1px solid #272a52; border-radius:22px; padding:22px; box-shadow:var(--shadow)
+    }
+    .grid{display:grid; gap:16px}
+    @media(min-width:780px){
+      .grid{grid-template-columns: 1.1fr .9fr}
+    }
+    ul{padding-left:18px; margin:10px 0}
+    li{margin:8px 0}
+    .ok{color:var(--ok)}
+    .muted{color:var(--muted)}
+
+    .actions{display:flex; flex-wrap:wrap; gap:12px; margin-top:14px; align-items:center}
+    button{
+      cursor:pointer; border:0; border-radius:14px; padding:12px 16px; font-size:16px; font-weight:700;
+      box-shadow:var(--shadow); transition:.25s transform, .25s filter, .25s opacity, .25s font-size
+    }
+    .primary{background:var(--accent); color:white}
+    .ghost{background:#1f244d; color:var(--text); border:1px solid #31376f}
+    button:hover{transform:translateY(-1px); filter:brightness(1.05)}
+
+    footer{margin:24px 0; text-align:center; color:#9aa0ff; font-size:13px}
+    .sig{font-style:italic; color:#c6c9ff}
+    .pill{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; background:#1d214b; border:1px solid #2a2e63; border-radius:999px; font-size:13px; color:#cfd3ff}
+  </style>
+</head>
+<body>
+  <!-- Lớp sticker -->
+  <div class="stickers" id="stickers"></div>
+
+  <div class="wrap">
+    <header>
+      <div class="pill">💌 Trang xin lỗi dễ thương 🐻💕</div>
+      <h1>Xin lỗi Khánh Bình 💖🙏</h1>
+      <p class="subtitle">Tui xin lỗi bạn nhiều lắm 😔</p>
+    </header>
+
+    <section class="grid">
+      <div class="card">
+        <h3>Lí do 😥</h3>
+        <ul>
+          <li>😢 Tui làm bà buồn</li>
+          <li>😳 Tui trêu bà</li>
+          <li>🤲 Tui muốn sửa sai</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Tui hứa 🤞</h3>
+        <ul>
+          <li class="ok">🙅‍♂️ Hông trêu bà nữa</li>
+          <li class="ok">💗 Quan tâm bà nhiều hơn</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3>Ủa… vậy bà có tha hong? 🥺</h3>
+      <div class="actions">
+        <button class="primary" id="acceptBtn" style="font-size:18px">Tha lỗi 💗</button>
+        <button class="ghost" id="denyBtn" style="font-size:16px">Hông tha 😶</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3>Ký tên</h3>
+      <p class="sig">— Xuân Quế 🐧</p>
+    </section>
+
+    <footer>© <span id="year"></span> Một lời xin lỗi chân thành từ Quế 💌</footer>
+  </div>
+
+  <script>
+    // Nền sticker
+    const cute = ['🐻','🍓','🌸','🐥','🫶','⭐','🧸','🍬','💫','🍑'];
+    const cont = document.getElementById('stickers');
+    const count = 70;
+    for(let i=0;i<count;i++){
+      const s = document.createElement('div');
+      s.className = 'sticker';
+      s.textContent = cute[i % cute.length];
+      s.style.left = Math.random()*100 + 'vw';
+      s.style.top = Math.random()*100 + 'vh';
+      s.style.animation = `floaty ${4 + Math.random()*4}s ease-in-out ${Math.random()*2}s infinite`;
+      s.style.opacity = 0.15 + Math.random()*0.25;
+      cont.appendChild(s);
+    }
+
+    // Logic nút
+    const acceptBtn = document.getElementById('acceptBtn');
+    const denyBtn = document.getElementById('denyBtn');
+    let denies = 0;
+
+    denyBtn.addEventListener('click', () => {
+      denies++;
+      const shrink = Math.max(0.6, 1 - denies*0.08);
+      const grow = 1 + denies*0.12;
+      denyBtn.style.transform = `scale(${shrink})`;
+      denyBtn.style.opacity = String(1 - denies*0.12);
+      denyBtn.style.fontSize = `${16 - denies*1.5}px`;
+
+      acceptBtn.style.transform = `scale(${grow})`;
+      acceptBtn.style.fontSize = `${18 + denies*1.6}px`;
+
+      if(denies >= 5){
+        denyBtn.style.display = 'none';
+        acceptBtn.textContent = 'Tui biết lỗi của tui rồi 💖';
+      }
+    });
+
+    acceptBtn.addEventListener('click', () => {
+      acceptBtn.animate(
+        [{ transform: acceptBtn.style.transform || 'scale(1)' },
+         { transform: 'scale(1.08)' },
+         { transform: 'scale(1)' }],
+        { duration: 280, easing: 'ease-out' }
+      );
+      alert('Cảm ơn bà đã đọc. Cho tui cơ hội sửa sai nghen 💗');
+    });
+
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
